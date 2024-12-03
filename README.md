@@ -1,2 +1,1 @@
-# week1-code-challenge
-# week1-code-challenge
+# wk1-code-challenge
