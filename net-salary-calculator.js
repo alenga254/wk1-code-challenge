@@ -1,3 +1,5 @@
+const readline = require('readline');
+
 // Function to calculate PAYE (Tax)
 function calculatePAYE(grossSalary) {
     let tax;
@@ -58,14 +60,26 @@ function calculateNetSalary(basicSalary, benefits) {
     };
 }
 
-// Example usage
-const basicSalary = 50000; // Replace with user input
-const benefits = 10000; // Replace with user input
+// Set up readline interface
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-const result = calculateNetSalary(basicSalary, benefits);
-console.log("Gross Salary: ", result.grossSalary);
-console.log("PAYE (Tax): ", result.paye);
-console.log("NHIF Deduction: ", result.nhif);
-console.log("NSSF Deduction: ", result.nssf);
-console.log("Net Salary: ", result.netSalary);
+// Prompt user for input
+rl.question('Enter your basic salary: ', (basicSalaryInput) => {
+    rl.question('Enter your benefits: ', (benefitsInput) => {
+        const basicSalary = parseFloat(basicSalaryInput);
+        const benefits = parseFloat(benefitsInput);
 
+        const result = calculateNetSalary(basicSalary, benefits);
+        console.log("Gross Salary: ", result.grossSalary);
+        console.log("PAYE (Tax): ", result.paye);
+        console.log("NHIF Deduction: ", result.nhif);
+        console.log("NSSF Deduction: ", result.nssf);
+        console.log("Net Salary: ", result.netSalary);
+
+        // Close the readline interface
+        rl.close();
+    });
+});
